@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Compass, Library, Tv } from 'lucide-react';
+import { UserWidget } from './UserWidget';
 
 export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const location = useLocation();
@@ -9,8 +10,16 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
 
   return (
     <div className="min-h-screen bg-[#FFF0F5] text-text pb-24 md:pb-0 md:pl-24">
+      {/* Mobile Top Bar */}
+      <div className="md:hidden fixed top-0 left-0 right-0 h-16 bg-white/80 backdrop-blur-md z-40 px-4 flex items-center justify-between border-b border-pink-100">
+        <div className="text-[#FFB7B2]">
+          <Tv size={28} strokeWidth={2.5} />
+        </div>
+        <UserWidget />
+      </div>
+
       {/* Mobile/Tablet Content Area */}
-      <main className="max-w-7xl mx-auto min-h-screen">
+      <main className="max-w-7xl mx-auto min-h-screen pt-20 md:pt-0">
         {children}
       </main>
 
@@ -50,6 +59,11 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
             <Library size={26} strokeWidth={isActive('/list') ? 2.5 : 2} />
             <span className="text-[10px] font-bold uppercase tracking-widest">Library</span>
           </Link>
+        </div>
+
+        {/* User Widget (Desktop) */}
+        <div className="mt-auto mb-8">
+          <UserWidget />
         </div>
       </nav>
     </div>
